@@ -1,6 +1,8 @@
 ﻿{
   "dependencies": {
-    "Microsoft.NETCore.UniversalWindowsPlatform": "5.0.0"
+    "Apps72.Dev.Data.Sqlite": "1.5.2-rc1-final",
+    "Microsoft.Data.Sqlite": "1.0.0-rc3-20761",
+    "Microsoft.NETCore.UniversalWindowsPlatform": "5.1.0"
   },
   "frameworks": {
     "uap10.0": {}
