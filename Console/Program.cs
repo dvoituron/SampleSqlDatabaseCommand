@@ -14,6 +14,7 @@ namespace SampleSqlDatabaseCommand.CommandConsole
         {
             AdoNet.DisplaySmith();
             EntityFramework.DisplaySmith();
+            Dapper.DisplaySmith();
 
             Console.WriteLine("Press any key to continue...");
             Console.ReadKey();
