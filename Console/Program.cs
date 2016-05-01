@@ -8,8 +8,14 @@ namespace SampleSqlDatabaseCommand.CommandConsole
 {
     class Program
     {
+        public const string CONNECTION_STRING = @"Server=(localdb)\ProjectsV12;Database=Scott;Integrated Security=true;";
+
         static void Main(string[] args)
         {
+            AdoNet.DisplaySmith();
+            EntityFramework.DisplaySmith();
+
+            Console.WriteLine("Press any key to continue...");
             Console.ReadKey();
         }
     }
