@@ -3,3 +3,7 @@
 ################################################################################
 
 /Console/bin/Debug
+/Console/obj/Debug
+/packages
+/UWP/bin/x86/Debug
+/UWP/obj/x86/Debug
