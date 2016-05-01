@@ -1,0 +1,7 @@
+C:\VSO\GitHub\SampleSqlDatabaseCommand\Clr\bin\Debug\Apps72.Dev.Data.SqlServer.dll
+C:\VSO\GitHub\SampleSqlDatabaseCommand\Clr\bin\Debug\Apps72.Dev.Data.SqlServer.xml
+C:\VSO\GitHub\SampleSqlDatabaseCommand\Clr\obj\Debug\CLR.csprojResolveAssemblyReference.cache
+C:\VSO\GitHub\SampleSqlDatabaseCommand\Clr\bin\Debug\SampleSqlDatabaseCommandClr.dll
+C:\VSO\GitHub\SampleSqlDatabaseCommand\Clr\bin\Debug\SampleSqlDatabaseCommandClr.pdb
+C:\VSO\GitHub\SampleSqlDatabaseCommand\Clr\obj\Debug\SampleSqlDatabaseCommandClr.dll
+C:\VSO\GitHub\SampleSqlDatabaseCommand\Clr\obj\Debug\SampleSqlDatabaseCommandClr.pdb

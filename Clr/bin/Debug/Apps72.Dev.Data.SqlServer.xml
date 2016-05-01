@@ -1,0 +1,1030 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Apps72.Dev.Data.SqlServer</name>
+    </assembly>
+    <members>
+        <member name="T:Apps72.Dev.Data.Annotations.ColumnAttribute">
+            <summary>
+            Specifies the database column that a property is mapped to.
+            </summary>
+        </member>
+        <member name="M:Apps72.Dev.Data.Annotations.ColumnAttribute.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the ColumnAttribute.
+            </summary>
+            <param name="name">The name of the column the property is mapped to.</param>
+        </member>
+        <member name="P:Apps72.Dev.Data.Annotations.ColumnAttribute.Name">
+            <summary>
+            Gets the name of the column the property is mapped to.
+            </summary>
+        </member>
+        <member name="M:Apps72.Dev.Data.Annotations.ColumnAttribute.GetColumnAttribute(System.Reflection.PropertyInfo)">
+            <summary>
+            Returns the Column attribute for the specified property.
+            </summary>
+            <param name="property">Property</param>
+            <returns>Column attribute or null if not found</returns>
+        </member>
+        <member name="M:Apps72.Dev.Data.Annotations.ColumnAttribute.GetColumnAttributeName(System.Reflection.PropertyInfo)">
+            <summary>
+            Returns the Column.Name attribute for the specified property.
+            </summary>
+            <param name="property">Property</param>
+            <returns>Column.Name attribute or String.Empty if not found</returns>
+        </member>
+        <member name="T:Apps72.Dev.Data.CommandTextFormatted">
+            <summary>
+            Manage the CommantText to display SQL Query including parameters.
+            </summary>
+        </member>
+        <member name="M:Apps72.Dev.Data.CommandTextFormatted.#ctor(System.Data.IDbCommand)">
+            <summary>
+            Initializes a new instance of CommandTextFormatted
+            </summary>
+            <param name="command"></param>
+        </member>
+        <member name="M:Apps72.Dev.Data.CommandTextFormatted.GetSqlFormatted(Apps72.Dev.Data.QueryFormat)">
+            <summary>
+            Gets the CommandText formatted with specified format
+            </summary>
+            <param name="format">Use Text to format as Simple SQL Query or use HTML to format as Colored SQL Query.</param>
+            <returns>Formatted query</returns>
+        </member>
+        <member name="M:Apps72.Dev.Data.CommandTextFormatted.GetQueryFormattedAsText(System.Data.IDbCommand)">
+            <summary>
+            Returns the CommandText with all parameter values included.
+            </summary>
+            <param name="command">DBCommand to manage</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apps72.Dev.Data.CommandTextFormatted.GetQueryFormattedAsHtml(System.Data.IDbCommand)">
+            <summary>
+            Format the SQL command in HTML (coloring, ...)
+            </summary>
+            <param name="command">Command to format in HTML</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apps72.Dev.Data.CommandTextFormatted.GetValueFormatted(System.Data.IDbDataParameter)">
+            <summary>
+            Returns the parameter value formatted for SQL request (ex. ABC => 'ABC', 12/01/1972 => '1972-01-12', ...) 
+            </summary>
+            <param name="parameter">Parameter to format</param>
+            <returns>Parameter value formatted</returns>
+        </member>
+        <member name="T:Apps72.Dev.Data.QueryFormat">
+            <summary>
+            Type of SQL formats
+            </summary>
+        </member>
+        <member name="F:Apps72.Dev.Data.QueryFormat.Text">
+            <summary>
+            SQL Command Text included parameters values
+            </summary>
+        </member>
+        <member name="F:Apps72.Dev.Data.QueryFormat.Html">
+            <summary>
+            SQL Command Text formatted in HTML for coloring, ...
+            </summary>
+        </member>
+        <member name="T:Apps72.Dev.Data.DatabaseCommandBase">
+            <summary>
+            Database command management
+            </summary>
+            <example>
+            <code>
+            public class SqlDatabaseCommand : DatabaseCommandBase&lt;SqlConnection, SqlCommand, SqlParameterCollection, SqlTransaction, SqlException&gt;
+            {
+                public SqlDatabaseCommand(SqlConnection connection) : base(connection) { }
+            }
+            </code>
+            </example>
+        </member>
+        <member name="T:Apps72.Dev.Data.DatabaseCommandBase.ExceptionOccuredEventHandler">
+            <summary>
+            Signature for ExceptionOccured event
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="E:Apps72.Dev.Data.DatabaseCommandBase.ExceptionOccured">
+            <summary>
+            Event raised when an SQL Exception occured (in Execute Methods)
+            </summary>
+        </member>
+        <member name="M:Apps72.Dev.Data.DatabaseCommandBase.#ctor(System.Data.Common.DbCommand,System.Data.Common.DbTransaction,System.Int32)">
+            <summary>
+            Create a command for a SQL Server connection
+            </summary>
+            <param name="command">Active command with predefined CommandText and Connection</param>
+            <param name="transaction">The transaction in which the SQL Query executes</param>
+            <param name="commandTimeout">the wait time (in seconds) before terminating the attempt to execute a command and generating an error.</param>
+        </member>
+        <member name="P:Apps72.Dev.Data.DatabaseCommandBase.CommandText">
+            <summary>
+            Gets or sets the sql query
+            </summary>
+        </member>
+        <member name="P:Apps72.Dev.Data.DatabaseCommandBase.CommandType">
+            <summary>
+            Gets or sets the command type
+            </summary>
+        </member>
+        <member name="P:Apps72.Dev.Data.DatabaseCommandBase.Connection">
+            <summary>
+            Gets or sets the current active connection
+            </summary>
+        </member>
+        <member name="P:Apps72.Dev.Data.DatabaseCommandBase.Command">
+            <summary>
+            Gets or sets the current DbCommand
+            </summary>
+        </member>
+        <member name="P:Apps72.Dev.Data.DatabaseCommandBase.Transaction">
+            <summary>
+            Gets or sets the current transaction
+            </summary>
+        </member>
+        <member name="P:Apps72.Dev.Data.DatabaseCommandBase.Parameters">
+            <summary>
+            Gets sql parameters of the query
+            </summary>
+        </member>
+        <member name="P:Apps72.Dev.Data.DatabaseCommandBase.ThrowException">
+            <summary>
+            Enable or disable the raise of exceptions when queries are executed.
+            Default is True (Enabled).
+            </summary>
+        </member>
+        <member name="P:Apps72.Dev.Data.DatabaseCommandBase.Exception">
+            <summary>
+            Gets the last raised exception 
+            </summary>
+        </member>
+        <member name="P:Apps72.Dev.Data.DatabaseCommandBase.Log">
+            <summary>
+            Set this property to log the SQL generated by this class to the given delegate. 
+            For example, to log to the console, set this property to Console.Write.
+            </summary>
+        </member>
+        <member name="M:Apps72.Dev.Data.DatabaseCommandBase.GetCommandTextFormatted(Apps72.Dev.Data.QueryFormat)">
+            <summary>
+            Gets the CommandText formatted with specified format
+            </summary>
+            <param name="format">Use Text to format as Simple SQL Query or use HTML to format as Colored SQL Query.</param>
+            <returns>Formatted query</returns>
+        </member>
+        <member name="M:Apps72.Dev.Data.DatabaseCommandBase.Clear">
+            <summary>
+            Delete the CommandText and the all sql parameters
+            </summary>
+        </member>
+        <member name="M:Apps72.Dev.Data.DatabaseCommandBase.Prepare">
+            <summary>
+            Prepare a query
+            </summary>
+        </member>
+        <member name="M:Apps72.Dev.Data.DatabaseCommandBase.TransactionBegin">
+            <summary>
+            Begin a transaction into the database
+            </summary>
+            <returns>Transaction</returns>
+        </member>
+        <member name="M:Apps72.Dev.Data.DatabaseCommandBase.TransactionCommit">
+            <summary>
+            Commit the current transaction to the database
+            </summary>
+        </member>
+        <member name="M:Apps72.Dev.Data.DatabaseCommandBase.TransactionRollback">
+            <summary>
+            Rollback the current transaction 
+            </summary>
+        </member>
+        <member name="M:Apps72.Dev.Data.DatabaseCommandBase.ExecuteTable">
+            <summary>
+            Execute query and return results by using a Datatable
+            </summary>
+            <returns>DataTable of results</returns>
+        </member>
+        <member name="M:Apps72.Dev.Data.DatabaseCommandBase.ExecuteTable``1">
+            <summary>
+            Execute the query and return an array of new instances of typed results filled with data table result.
+            </summary>
+            <typeparam name="TReturn">Object type</typeparam>
+            <returns>Array of typed results</returns>
+            <example>
+            <code>
+              Employee[] emp = cmd.ExecuteTable&lt;Employee&gt;();
+              var x = cmd.ExecuteTable&lt;Employee&gt;();
+            </code>
+            <remarks>
+              Result object property (ex. Employee.Name) may be tagged with the ColumnAttribute 
+              to set which column name (ex. [Column("Name")] must be associated to this property.
+            </remarks>
+            </example>
+        </member>
+        <member name="M:Apps72.Dev.Data.DatabaseCommandBase.ExecuteTable``1(``0)">
+            <summary>
+            Execute the query and return an array of new instances of typed results filled with data table result.
+            </summary>
+            <typeparam name="TReturn">Object type</typeparam>
+            <param name="itemOftype"></param>
+            <returns>Array of typed results</returns>
+            <example>
+            <code>
+              Employee emp = new Employee();
+              var x = cmd.ExecuteTable(new { emp.Age, emp.Name });
+              var y = cmd.ExecuteTable(new { Age = 0, Name = "" });
+            </code>
+            <remarks>
+              Result object property (ex. Employee.Name) may be tagged with the ColumnAttribute 
+              to set which column name (ex. [Column("Name")] must be associated to this property.
+            </remarks>
+            </example>
+        </member>
+        <member name="M:Apps72.Dev.Data.DatabaseCommandBase.ExecuteTable``1(System.Func{System.Data.DataRow,``0})">
+            <summary>
+            Execute the query and return an array of new instances of typed results filled with data table result.
+            </summary>
+            <typeparam name="TReturn">Object type</typeparam>
+            <param name="converter">Conveter method to return a typed object from DataRow</param>
+            <returns>Array of typed results</returns>
+        </member>
+        <member name="M:Apps72.Dev.Data.DatabaseCommandBase.ExecuteNonQuery">
+            <summary>
+            Execute the query and return the count of modified rows
+            </summary>
+            <returns>Count of modified rows</returns>
+        </member>
+        <member name="M:Apps72.Dev.Data.DatabaseCommandBase.ExecuteScalar">
+            <summary>
+            Execute the query and return the first column of the first row of results
+            </summary>
+            <returns>Object - Result</returns>
+        </member>
+        <member name="M:Apps72.Dev.Data.DatabaseCommandBase.ExecuteScalar``1">
+            <summary>
+            Execute the query and return the first column of the first row of results
+            </summary>
+            <typeparam name="TReturn">Return type</typeparam>
+            <returns>Result</returns>
+        </member>
+        <member name="M:Apps72.Dev.Data.DatabaseCommandBase.ExecuteRow">
+            <summary>
+            Execute the query and return the first row of results    
+            </summary>
+            <returns>First row of results</returns>
+        </member>
+        <member name="M:Apps72.Dev.Data.DatabaseCommandBase.ExecuteRow``1">
+            <summary>
+            Execute the query and return a new instance of TReturn with the first row of results
+            </summary>
+            <typeparam name="TReturn">Object type</typeparam>
+            <returns>First row of results</returns>
+            <example>
+            <code>
+              Employee emp = cmd.ExecuteRow&lt;Employee&gt;();
+            </code>
+            <remarks>
+              Result object property (ex. Employee.Name) may be tagged with the ColumnAttribute 
+              to set which column name (ex. [Column("Name")] must be associated to this property.
+            </remarks>
+            </example>
+        </member>
+        <member name="M:Apps72.Dev.Data.DatabaseCommandBase.ExecuteRow``1(``0)">
+            <summary>
+            Execute the query and fill the specified TReturn object with the first row of results
+            </summary>
+            <typeparam name="TReturn">Object type</typeparam>
+            <param name="itemOftype"></param>
+            <returns>First row of results</returns>
+            <example>
+            <code>
+              Employee emp = new Employee();
+              var x = cmd.ExecuteRow(new { emp.Age, emp.Name });
+              var y = cmd.ExecuteRow(new { Age = 0, Name = "" });
+              var z = cmd.ExecuteRow(emp);
+            </code>
+            <remarks>
+              Result object property (ex. Employee.Name) may be tagged with the ColumnAttribute 
+              to set which column name (ex. [Column("Name")] must be associated to this property.
+            </remarks>
+            </example>
+        </member>
+        <member name="M:Apps72.Dev.Data.DatabaseCommandBase.ExecuteRow``1(System.Func{System.Data.DataRow,``0})">
+            <summary>
+            Execute the query and fill the specified TReturn object with the first row of results
+            </summary>
+            <typeparam name="TReturn">Object type</typeparam>
+            <param name="converter">Conveter method to return a typed object from DataRow</param>
+            <returns>First row of results</returns>
+        </member>
+        <member name="M:Apps72.Dev.Data.DatabaseCommandBase.OnExceptionOccured(Apps72.Dev.Data.ExceptionOccuredEventArgs)">
+            <summary>
+            Raises the ExceptionOccured event.
+            </summary>
+            <param name="e"></param>
+        </member>
+        <member name="M:Apps72.Dev.Data.DatabaseCommandBase.Dispose">
+            <summary>
+            Dispose the object and free ressources
+            </summary>
+        </member>
+        <member name="M:Apps72.Dev.Data.DatabaseCommandBase.Dispose(System.Boolean)">
+            <summary>
+            Dispose the object and free ressources
+            </summary>
+            <param name="disposing"></param>
+        </member>
+        <member name="M:Apps72.Dev.Data.DatabaseCommandBase.ResetException">
+            <summary>
+            Set the last raised exception to null
+            </summary>
+        </member>
+        <member name="M:Apps72.Dev.Data.DatabaseCommandBase.ThrowSqlExceptionOrDefaultValue``1(System.Data.Common.DbException)">
+            <summary>
+            Raise the Exception if the ThrowException property is set to TRUE
+            </summary>
+            <typeparam name="T">Type</typeparam>
+            <param name="ex">Exception</param>
+            <returns></returns>
+        </member>
+        <member name="T:Apps72.Dev.Data.DataExtensions">
+            <summary>
+            Helper Extensions to simplify data management
+            </summary>
+        </member>
+        <member name="M:Apps72.Dev.Data.DataExtensions.ConvertToDBNull(System.Data.Common.DbParameter)">
+            <summary>
+            Convert the parameter value to a DBNull.Value if this value is null.
+            </summary>
+            <param name="parameter"></param>
+        </member>
+        <member name="M:Apps72.Dev.Data.DataExtensions.AddWithValueOrDBNull(System.Data.SqlClient.SqlParameterCollection,System.String,System.Object)">
+            <summary>
+            Adds a value to the end of the System.Data.SqlClient.SqlParameterCollection.
+            </summary>
+            <param name="parameters"></param>
+            <param name="parameterName">The name of the parameter.</param>
+            <param name="value">The value to be added. Null value will be replaced by System.DBNull.Value.</param>
+            <returns>A System.Data.SqlClient.SqlParameter object.</returns>
+        </member>
+        <member name="M:Apps72.Dev.Data.DataExtensions.AddValues``1(System.Data.SqlClient.SqlParameterCollection,``0)">
+            <summary>
+            Add all properties / values to the end of the System.Data.SqlClient.SqlParameterCollection.
+            If a property is already exist in Parameters collection, the parameter is removed and new added with new value.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="parameters"></param>
+            <param name="values">Object or anonymous object to convert all properties to parameters</param>
+        </member>
+        <member name="M:Apps72.Dev.Data.DataExtensions.AppendLineFormat(System.Text.StringBuilder,System.String,System.Object[])">
+            <summary>
+            Appends a copy of the specified string followed by the default line terminator
+            to the end of the current System.Text.StringBuilder object.
+            </summary>
+            <param name="builder">A stringBuilder to updtate</param>
+            <param name="format">A composite format string to append.</param>
+            <param name="args">An object array that contains zero or more objects to format.</param>
+            <returns>A reference to this instance after the append operation has completed.</returns>
+            <exception cref="T:System.ArgumentOutOfRangeException">
+            Enlarging the value of this instance would exceed System.Text.StringBuilder.MaxCapacity.
+            </exception>
+        </member>
+        <member name="T:Apps72.Dev.Data.DataInjectionDbCommand">
+            <summary>
+            Main properties used with current DatabaseCommand request.
+            </summary>
+        </member>
+        <member name="M:Apps72.Dev.Data.DataInjectionDbCommand.#ctor(System.Data.Common.DbCommand)">
+            <summary>
+            Initializes a new instance of DataInjection Database Command
+            </summary>
+            <param name="command"></param>
+        </member>
+        <member name="P:Apps72.Dev.Data.DataInjectionDbCommand.CommandText">
+            <summary>
+            Get the CommandText used with this request.
+            </summary>
+        </member>
+        <member name="P:Apps72.Dev.Data.DataInjectionDbCommand.CommandType">
+            <summary>
+            Get the CommandType used with this request.
+            </summary>
+        </member>
+        <member name="P:Apps72.Dev.Data.DataInjectionDbCommand.Parameters">
+            <summary>
+            Get all parameters used with this request.
+            </summary>
+        </member>
+        <member name="T:Apps72.Dev.Data.DataInjectionExtension">
+            <summary>
+            Extension method to inject data in requests (for Unit Testing)
+            </summary>
+        </member>
+        <member name="M:Apps72.Dev.Data.DataInjectionExtension.DefineDataInjection(System.Data.Common.DbConnection,System.Func{Apps72.Dev.Data.DataInjectionDbCommand,System.Data.DataTable})">
+            <summary>
+            Set the function to execute when the DatabaseCommand class need to retrieve data,
+            and bypass the Database Server request process.
+            </summary>
+            <param name="connection"></param>
+            <param name="action"></param>
+        </member>
+        <member name="M:Apps72.Dev.Data.DataInjectionExtension.GetRetrieveDataInjectionDataTable(System.Data.Common.DbConnection)">
+            <summary>
+            Returns the Function associated to this DbConnection to retrieve data.
+            </summary>
+            <param name="connection"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Apps72.Dev.Data.DataInjectionExtension.ContainsDataInjectionDataTable(System.Data.Common.DbConnection)">
+            <summary>
+            Check if an action was previously registered for this DbConnection
+            </summary>
+            <param name="connection"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Apps72.Dev.Data.DataInjectionExtension.InvokeAndReturnData(System.Data.Common.DbConnection,System.Data.Common.DbCommand)">
+            <summary>
+            Invoke the previously registered action and return the DataTable
+            </summary>
+            <param name="connection"></param>
+            <param name="command"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Apps72.Dev.Data.DataTypedConvertor">
+            <summary>
+            Convert DataRows to Typed objects or Typed objects to DataRows.
+            </summary>
+        </member>
+        <member name="M:Apps72.Dev.Data.DataTypedConvertor.DataTableTo``1(System.Data.DataTable)">
+            <summary>
+            Creates a new instance of T type and sets all row values to the new T properties.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="table"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Apps72.Dev.Data.DataTypedConvertor.DataRowTo``1(System.Data.DataRow)">
+            <summary>
+            Creates a new instance of T type and sets all row values to the new T properties.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="row"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Apps72.Dev.Data.DataTypedConvertor.DataRowTo``1(System.Data.DataRow,``0)">
+            <summary>
+            If item is null, creates a new instance of T type and sets all row values to the new T properties.
+            If item is not null, sets all row values to item object properties
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="row"></param>
+            <param name="item"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Apps72.Dev.Data.DataTypedConvertor.ToDataTable``1(System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            Creates a new instance of DataTabmle and sets all row values from the T properties.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="array"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Apps72.Dev.Data.DataTypedConvertor.ToParameterCollection``1(``0)">
+            <summary>
+            Creates a new instance of IDataParameter[] with ParameterName, Value and IsNullable properties 
+            sets to value's properties.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Apps72.Dev.Data.DataTypedConvertor.IsPrimitive(System.Type)">
+            <summary>
+            Returns True if this object is a simple type.
+            </summary>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Apps72.Dev.Data.DataTypedConvertor.IsAnonymousType(System.Type)">
+            <summary>
+            Returns True if the specified type is an AnonymousType.
+            </summary>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Apps72.Dev.Data.DataTypedConvertor.IsNullable(System.Type)">
+            <summary>
+            Returns True if the specified type is nullable
+            </summary>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Apps72.Dev.Data.DataTypedConvertor.GetNullableType(System.Type)">
+            <summary>
+            Returns the sub-type if specified type is null or
+            returns the specified type.
+            </summary>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Apps72.Dev.Data.DataTypedConvertor.FillDbTypeList">
+            <summary>
+            Fill all dbTypeList entries
+            See https://gist.github.com/abrahamjp
+            </summary>
+        </member>
+        <member name="M:Apps72.Dev.Data.DataTypedConvertor.ToNetType(System.Data.DbType)">
+            <summary>
+            Convert db type to .Net data type
+            </summary>
+            <param name="dbType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Apps72.Dev.Data.DataTypedConvertor.ToNetType(System.Data.SqlDbType)">
+            <summary>
+            Convert TSQL type to .Net data type
+            </summary>
+            <param name="sqlDbType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Apps72.Dev.Data.DataTypedConvertor.ToDbType(System.Type)">
+            <summary>
+            Convert .Net type to Db type
+            </summary>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Apps72.Dev.Data.DataTypedConvertor.ToDbType(System.Data.SqlDbType)">
+            <summary>
+            Convert TSQL data type to DbType
+            </summary>
+            <param name="sqlDbType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Apps72.Dev.Data.DataTypedConvertor.ToSqlDbType(System.Type)">
+            <summary>
+            Convert .Net type to TSQL data type
+            </summary>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Apps72.Dev.Data.DataTypedConvertor.ToSqlDbType(System.Data.DbType)">
+            <summary>
+            Convert DbType type to TSQL data type
+            </summary>
+            <param name="dbType"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Apps72.Dev.Data.DataTypedConvertor.DbTypeMapEntry">
+            <summary />
+        </member>
+        <member name="T:Apps72.Dev.Data.DataTypedConvertor.DataParameter">
+            <summary>
+            Class implementing IDataParameter
+            </summary>
+        </member>
+        <member name="P:Apps72.Dev.Data.DataTypedConvertor.DataParameter.DbType">
+            <summary>
+            <see cref="P:System.Data.IDataParameter.DbType"/>
+            </summary>
+        </member>
+        <member name="P:Apps72.Dev.Data.DataTypedConvertor.DataParameter.IsNullable">
+            <summary>
+            <see cref="P:System.Data.IDataParameter.IsNullable"/>
+            </summary>
+        </member>
+        <member name="P:Apps72.Dev.Data.DataTypedConvertor.DataParameter.ParameterName">
+            <summary>
+            <see cref="P:System.Data.IDataParameter.ParameterName"/>
+            </summary>
+        </member>
+        <member name="P:Apps72.Dev.Data.DataTypedConvertor.DataParameter.Value">
+            <summary>
+            <see cref="P:System.Data.IDataParameter.Value"/>
+            </summary>
+        </member>
+        <member name="P:Apps72.Dev.Data.DataTypedConvertor.DataParameter.Direction">
+            <summary>
+            <see cref="P:System.Data.IDataParameter.Direction"/>
+            </summary>
+        </member>
+        <member name="P:Apps72.Dev.Data.DataTypedConvertor.DataParameter.SourceColumn">
+            <summary>
+            <see cref="P:System.Data.IDataParameter.SourceColumn"/>
+            </summary>
+        </member>
+        <member name="P:Apps72.Dev.Data.DataTypedConvertor.DataParameter.SourceVersion">
+            <summary>
+            <see cref="P:System.Data.IDataParameter.SourceVersion"/>
+            </summary>
+        </member>
+        <member name="T:Apps72.Dev.Data.ExceptionOccuredEventArgs">
+            <summary>
+            Argument of ExceptionOccured event.
+            </summary>
+        </member>
+        <member name="P:Apps72.Dev.Data.ExceptionOccuredEventArgs.Exception">
+            <summary>
+            Gets or sets the exception occured
+            </summary>
+        </member>
+        <member name="T:Apps72.Dev.Data.IDatabaseCommandBase">
+            <summary>
+            Base Interface to manage all DataBaseCommands
+            </summary>
+        </member>
+        <member name="P:Apps72.Dev.Data.IDatabaseCommandBase.CommandText">
+            <summary>
+            Gets or sets the sql query
+            </summary>
+        </member>
+        <member name="P:Apps72.Dev.Data.IDatabaseCommandBase.CommandType">
+            <summary>
+            Gets or sets the command type
+            </summary>
+        </member>
+        <member name="P:Apps72.Dev.Data.IDatabaseCommandBase.Transaction">
+            <summary>
+            Gets or sets the current transaction
+            </summary>
+        </member>
+        <member name="P:Apps72.Dev.Data.IDatabaseCommandBase.Parameters">
+            <summary>
+            Gets sql parameters of the query
+            </summary>
+        </member>
+        <member name="P:Apps72.Dev.Data.IDatabaseCommandBase.ThrowException">
+            <summary>
+            Enable or disable the raise of exceptions when queries are executed.
+            Default is True (Enabled).
+            </summary>
+        </member>
+        <member name="P:Apps72.Dev.Data.IDatabaseCommandBase.Exception">
+            <summary>
+            Gets the last raised exception 
+            </summary>
+        </member>
+        <member name="P:Apps72.Dev.Data.IDatabaseCommandBase.Log">
+            <summary>
+            Set this property to log the SQL generated by this class to the given delegate. 
+            For example, to log to the console, set this property to Console.Write.
+            </summary>
+        </member>
+        <member name="M:Apps72.Dev.Data.IDatabaseCommandBase.Clear">
+            <summary>
+            Delete the CommandText and the all sql parameters
+            </summary>
+        </member>
+        <member name="M:Apps72.Dev.Data.IDatabaseCommandBase.Prepare">
+            <summary>
+            Prepare a query
+            </summary>
+        </member>
+        <member name="M:Apps72.Dev.Data.IDatabaseCommandBase.TransactionBegin">
+            <summary>
+            Begin a transaction into the database
+            </summary>
+            <returns>Transaction</returns>
+        </member>
+        <member name="M:Apps72.Dev.Data.IDatabaseCommandBase.TransactionCommit">
+            <summary>
+            Commit the current transaction to the database
+            </summary>
+        </member>
+        <member name="M:Apps72.Dev.Data.IDatabaseCommandBase.TransactionRollback">
+            <summary>
+            Rollback the current transaction 
+            </summary>
+        </member>
+        <member name="M:Apps72.Dev.Data.IDatabaseCommandBase.ExecuteTable">
+            <summary>
+            Execute query and return results by using a Datatable
+            </summary>
+            <returns>DataTable of results</returns>
+        </member>
+        <member name="M:Apps72.Dev.Data.IDatabaseCommandBase.ExecuteTable``1">
+            <summary>
+            Execute the query and return an array of new instances of typed results filled with data table result.
+            </summary>
+            <typeparam name="TReturn">Object type</typeparam>
+            <returns>Array of typed results</returns>
+            <example>
+            <code>
+              Employee[] emp = cmd.ExecuteTable&lt;Employee&gt;();
+              var x = cmd.ExecuteTable&lt;Employee&gt;();
+            </code>
+            <remarks>
+              Result object property (ex. Employee.Name) may be tagged with the ColumnAttribute 
+              to set which column name (ex. [Column("Name")] must be associated to this property.
+            </remarks>
+            </example>
+        </member>
+        <member name="M:Apps72.Dev.Data.IDatabaseCommandBase.ExecuteTable``1(``0)">
+            <summary>
+            Execute the query and return an array of new instances of typed results filled with data table result.
+            </summary>
+            <typeparam name="TReturn">Object type</typeparam>
+            <param name="itemOftype"></param>
+            <returns>Array of typed results</returns>
+            <example>
+            <code>
+              Employee emp = new Employee();
+              var x = cmd.ExecuteTable(new { emp.Age, emp.Name });
+              var y = cmd.ExecuteTable(new { Age = 0, Name = "" });
+            </code>
+            <remarks>
+              Result object property (ex. Employee.Name) may be tagged with the ColumnAttribute 
+              to set which column name (ex. [Column("Name")] must be associated to this property.
+            </remarks>
+            </example>
+        </member>
+        <member name="M:Apps72.Dev.Data.IDatabaseCommandBase.ExecuteTable``1(System.Func{System.Data.DataRow,``0})">
+            <summary>
+            Execute the query and return an array of new instances of typed results filled with data table result.
+            </summary>
+            <typeparam name="TReturn">Object type</typeparam>
+            <param name="converter">Conveter method to return a typed object from DataRow</param>
+            <returns>Array of typed results</returns>
+        </member>
+        <member name="M:Apps72.Dev.Data.IDatabaseCommandBase.ExecuteNonQuery">
+            <summary>
+            Execute the query and return the count of modified rows
+            </summary>
+            <returns>Count of modified rows</returns>
+        </member>
+        <member name="M:Apps72.Dev.Data.IDatabaseCommandBase.ExecuteScalar">
+            <summary>
+            Execute the query and return the first column of the first row of results
+            </summary>
+            <returns>Object - Result</returns>
+        </member>
+        <member name="M:Apps72.Dev.Data.IDatabaseCommandBase.ExecuteScalar``1">
+            <summary>
+            Execute the query and return the first column of the first row of results
+            </summary>
+            <typeparam name="TReturn">Return type</typeparam>
+            <returns>Result</returns>
+        </member>
+        <member name="M:Apps72.Dev.Data.IDatabaseCommandBase.ExecuteRow">
+            <summary>
+            Execute the query and return the first row of results    
+            </summary>
+            <returns>First row of results</returns>
+        </member>
+        <member name="M:Apps72.Dev.Data.IDatabaseCommandBase.ExecuteRow``1">
+            <summary>
+            Execute the query and return a new instance of TReturn with the first row of results
+            </summary>
+            <typeparam name="TReturn">Object type</typeparam>
+            <returns>First row of results</returns>
+            <example>
+            <code>
+              Employee emp = cmd.ExecuteRow&lt;Employee&gt;();
+            </code>
+            <remarks>
+              Result object property (ex. Employee.Name) may be tagged with the ColumnAttribute 
+              to set which column name (ex. [Column("Name")] must be associated to this property.
+            </remarks>
+            </example>
+        </member>
+        <member name="M:Apps72.Dev.Data.IDatabaseCommandBase.ExecuteRow``1(``0)">
+            <summary>
+            Execute the query and fill the specified TReturn object with the first row of results
+            </summary>
+            <typeparam name="TReturn">Object type</typeparam>
+            <param name="itemOftype"></param>
+            <returns>First row of results</returns>
+            <example>
+            <code>
+              Employee emp = new Employee();
+              var x = cmd.ExecuteRow(new { emp.Age, emp.Name });
+              var y = cmd.ExecuteRow(new { Age = 0, Name = "" });
+              var z = cmd.ExecuteRow(emp);
+            </code>
+            <remarks>
+              Result object property (ex. Employee.Name) may be tagged with the ColumnAttribute 
+              to set which column name (ex. [Column("Name")] must be associated to this property.
+            </remarks>
+            </example>
+        </member>
+        <member name="M:Apps72.Dev.Data.IDatabaseCommandBase.ExecuteRow``1(System.Func{System.Data.DataRow,``0})">
+            <summary>
+            Execute the query and fill the specified TReturn object with the first row of results
+            </summary>
+            <typeparam name="TReturn">Object type</typeparam>
+            <param name="converter">Conveter method to return a typed object from DataRow</param>
+            <returns>First row of results</returns>
+        </member>
+        <member name="T:Apps72.Dev.Data.SqlDatabaseCommand">
+            <summary>
+            SQL Server Database command management 
+            </summary>
+        </member>
+        <member name="M:Apps72.Dev.Data.SqlDatabaseCommand.#ctor(System.Data.SqlClient.SqlConnection)">
+            <summary>
+            Create a command for a SQL Server connection
+            </summary>
+            <param name="connection">Active SQL Server connection</param>
+        </member>
+        <member name="M:Apps72.Dev.Data.SqlDatabaseCommand.#ctor(System.Data.SqlClient.SqlConnection,System.String)">
+            <summary>
+            Create a command for a SQL Server connection
+            </summary>
+            <param name="connection">Active SQL Server connection</param>
+            <param name="commandText">SQL query</param>
+        </member>
+        <member name="M:Apps72.Dev.Data.SqlDatabaseCommand.#ctor(System.Data.SqlClient.SqlConnection,System.Data.SqlClient.SqlTransaction)">
+            <summary>
+            Create a command for a SQL Server connection
+            </summary>
+            <param name="connection">Active SQL Server connection</param>
+            <param name="transaction">The transaction in which the SQL Query executes</param>
+        </member>
+        <member name="M:Apps72.Dev.Data.SqlDatabaseCommand.#ctor(System.Data.SqlClient.SqlConnection,System.Data.SqlClient.SqlTransaction,System.String)">
+            <summary>
+            Create a command for a SQL Server connection
+            </summary>
+            <param name="connection">Active SQL Server connection</param>
+            <param name="transaction">The transaction in which the SQL Query executes</param>
+            <param name="commandText">SQL query</param>
+        </member>
+        <member name="M:Apps72.Dev.Data.SqlDatabaseCommand.#ctor(System.String)">
+            <summary>
+            Create a command for a temporary SQL Server connection, when given a string that contains the connection string
+            </summary>
+            <param name="connectionString">The connection used to open the SQL Server database.</param>
+        </member>
+        <member name="M:Apps72.Dev.Data.SqlDatabaseCommand.#ctor(System.String,System.String)">
+            <summary>
+            Create a command for a temporary SQL Server connection, when given a string that contains the connection string
+            </summary>
+            <param name="connectionString">The connection used to open the SQL Server database.</param>
+            <param name="commandText">SQL query</param>
+        </member>
+        <member name="M:Apps72.Dev.Data.SqlDatabaseCommand.#ctor(System.Data.SqlClient.SqlConnection,System.Data.SqlClient.SqlTransaction,System.String,System.Int32)">
+            <summary>
+            Create a command for a SQL Server connection
+            </summary>
+            <param name="connection">Active SQL Server connection</param>
+            <param name="transaction">The transaction in which the SQL Query executes</param>
+            <param name="commandText">SQL query</param>
+            <param name="commandTimeout">Maximum timeout of the queries</param>
+        </member>
+        <member name="M:Apps72.Dev.Data.SqlDatabaseCommand.#ctor(System.String,System.String,System.Int32)">
+            <summary>
+            Create a command for a temporary SQL Server connection, when given a string that contains the connection string
+            </summary>
+            <param name="connectionString">The connection used to open the SQL Server database.</param>
+            <param name="commandText">SQL query</param>
+            <param name="commandTimeout">Maximum timeout of the queries</param>
+        </member>
+        <member name="P:Apps72.Dev.Data.SqlDatabaseCommand.Transaction">
+            <summary>
+            Gets or sets the current transaction
+            </summary>
+        </member>
+        <member name="P:Apps72.Dev.Data.SqlDatabaseCommand.Parameters">
+            <summary>
+            Gets sql parameters of the query
+            </summary>
+        </member>
+        <member name="P:Apps72.Dev.Data.SqlDatabaseCommand.RetryIfExceptionsOccured">
+            <summary>
+            Gets how to retry query executions if a SqlException occured.
+            To use this feature, set the default error number to retry, via RetryIfExceptionsOccured.SetDeadLockCodes()
+            By default, a maximum of 3 retries and a waiting time of 1 second between two retries, is set.
+            </summary>
+        </member>
+        <member name="P:Apps72.Dev.Data.SqlDatabaseCommand.Exception">
+            <summary>
+            Gets the last raised exception 
+            </summary>
+        </member>
+        <member name="M:Apps72.Dev.Data.SqlDatabaseCommand.TransactionBegin">
+            <summary>
+            Begin a transaction into the database
+            </summary>
+            <returns>Transaction</returns>
+        </member>
+        <member name="M:Apps72.Dev.Data.SqlDatabaseCommand.ExecuteTable">
+            <summary>
+            Execute query and return results by using a Datatable
+            </summary>
+            <returns>DataTable of results</returns>
+        </member>
+        <member name="M:Apps72.Dev.Data.SqlDatabaseCommand.ExecuteNonQuery">
+            <summary>
+            Execute the query and return the count of modified rows
+            </summary>
+            <returns>Count of modified rows</returns>
+        </member>
+        <member name="M:Apps72.Dev.Data.SqlDatabaseCommand.ExecuteScalar">
+            <summary>
+            Execute the query and return the first column of the first row of results
+            </summary>
+            <returns>Object - Result</returns>
+        </member>
+        <member name="M:Apps72.Dev.Data.SqlDatabaseCommand.Dispose(System.Boolean)">
+            <summary>
+            Dispose the object and free ressources
+            </summary>
+            <param name="disposing"></param>
+        </member>
+        <member name="M:Apps72.Dev.Data.SqlDatabaseCommand.ExecuteCommandOrRetryIfErrorOccured``1(System.Func{``0})">
+            <summary>
+            Execute the specified method (ExecuteTable, ExecuteNonQuery or ExecuteScalar)
+            And retry x times if asked by RetryIfExceptionsOccured property.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="action"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Apps72.Dev.Data.SqlDatabaseCommand.GetContextConnection">
+            <summary>
+            Gets the current context connection
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Apps72.Dev.Data.SqlDatabaseRetryExceptions">
+            <summary>
+            Parameters to retry a query when a SqlException occured (ex. DeadLock exception).
+            </summary>
+        </member>
+        <member name="M:Apps72.Dev.Data.SqlDatabaseRetryExceptions.#ctor">
+            <summary>
+            Initializes a new instance of SqlDatabaseRetryExceptions.
+            </summary>
+        </member>
+        <member name="P:Apps72.Dev.Data.SqlDatabaseRetryExceptions.NumberOfRetriesBeforeFailed">
+            <summary>
+            Gets or sets the number of retries to execute before the process failed.
+            </summary>
+        </member>
+        <member name="P:Apps72.Dev.Data.SqlDatabaseRetryExceptions.MillisecondsBetweenTwoRetries">
+            <summary>
+            Gets or sets the number of milliseconds to wait before a new command will be executed.
+            </summary>
+        </member>
+        <member name="P:Apps72.Dev.Data.SqlDatabaseRetryExceptions.ErrorCodesToRetry">
+            <summary>
+            Gets or sets the list of error codes to catch and to retry.
+            </summary>
+        </member>
+        <member name="M:Apps72.Dev.Data.SqlDatabaseRetryExceptions.SetDeadLockCodes">
+            <summary>
+            Sets the default ErrorCodesToRetry list with DeadLock codes (1205).
+            </summary>
+        </member>
+        <member name="P:Apps72.Dev.Data.SqlDatabaseRetryExceptions.RetryCount">
+            <summary>
+            Gets or sets the number of retries already occured.
+            </summary>
+        </member>
+        <member name="T:Apps72.Dev.Data.SqlDatabaseRetryExceptionsExtension">
+            <summary>
+            Extensions methods to manipulate SqlDatabaseRetryExceptions
+            </summary>
+        </member>
+        <member name="M:Apps72.Dev.Data.SqlDatabaseRetryExceptionsExtension.IsDefined(Apps72.Dev.Data.SqlDatabaseRetryExceptions)">
+            <summary>
+            Returns True if the retryExceptions object is defined with at least one error code to check
+            </summary>
+            <param name="retryExceptions"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Apps72.Dev.Data.SqlDatabaseRetryExceptionsExtension.IsAnExceptionToRetry(Apps72.Dev.Data.SqlDatabaseRetryExceptions,System.Data.SqlClient.SqlException)">
+            <summary>
+            Returns True if the specified SqlException is known by the ErrorCodesToRetry list
+            </summary>
+            <param name="retryExceptions"></param>
+            <param name="ex"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Apps72.Dev.Data.SqlDatabaseRetryExceptionsExtension.IsNotAnExceptionToRetry(Apps72.Dev.Data.SqlDatabaseRetryExceptions,System.Data.SqlClient.SqlException)">
+            <summary>
+            Returns True if the specified SqlException is unknown by the ErrorCodesToRetry list
+            </summary>
+            <param name="retryExceptions"></param>
+            <param name="ex"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Apps72.Dev.Data.SqlDatabaseRetryExceptionsExtension.IsMustRetryAndWait(Apps72.Dev.Data.SqlDatabaseRetryExceptions)">
+            <summary>
+            Increment the Retry Counter of SqlDatabaseRetryExceptions,
+            And wait some milliseconds before to continue.
+            Returns False if the counter is greater than NumberOfRetriesBeforeFailed value.
+            </summary>
+            <param name="retryExceptions"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Apps72.Dev.Data.SqlDatabaseRetryExceptionsExtension.ResetRetryCounter(Apps72.Dev.Data.SqlDatabaseRetryExceptions)">
+            <summary>
+            Reset the Retry Counter to 0
+            </summary>
+            <param name="retryExceptions"></param>
+        </member>
+    </members>
+</doc>
