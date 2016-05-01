@@ -12,6 +12,7 @@ namespace SampleSqlDatabaseCommand.CommandConsole
     {
         public static void DisplaySmith()
         {
+            Console.WriteLine();
             Console.WriteLine("ADO.NET");
 
             using (var connection = new SqlConnection(Program.CONNECTION_STRING))
@@ -22,7 +23,8 @@ namespace SampleSqlDatabaseCommand.CommandConsole
                     cmd.CommandText = "SELECT ENAME " +
                                       "  FROM EMP " +
                                       " WHERE EMPNO = 7369 ";
-                                        using (var adapter = new SqlDataAdapter(cmd))
+
+                    using (var adapter = new SqlDataAdapter(cmd))
                     {
                         DataTable table = new DataTable();
                         adapter.Fill(table);

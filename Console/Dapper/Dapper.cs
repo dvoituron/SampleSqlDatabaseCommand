@@ -12,16 +12,17 @@ namespace SampleSqlDatabaseCommand.CommandConsole
     {
         public static void DisplaySmith()
         {
+            Console.WriteLine();
             Console.WriteLine("Dapper.NET");
 
             using (var connection = new SqlConnection(Program.CONNECTION_STRING))
             {
                 connection.Open();
 
-                string sql = "SELECT ENAME FROM EMP WHERE EMPNO = @Id";
-                var emp = connection.ExecuteScalar<string>(sql, new { Id = 7369 });
+                string sql = "SELECT * FROM EMP WHERE EMPNO = @Id";
+                var emp = connection.Query<Employee>(sql, new { Id = 7369 });
 
-                Console.WriteLine(emp);
+                Console.WriteLine(emp.First().ENAME);
             }
 
         }
@@ -34,7 +35,7 @@ namespace SampleSqlDatabaseCommand.CommandConsole
         public String JOB { get; set; }
         public Int32? MGR { get; set; }
         public DateTime? HIREDATE { get; set; }
-        public Decimal? SAL { get; set; }
+        public Int32? SAL { get; set; }
         public Int32? COMM { get; set; }
         public Int32? DEPTNO { get; set; }
     }

@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SampleSqlDatabaseCommand.CommandConsole
+namespace SampleSqlDatabaseCommand.CommandConsole.EF
 {
     using System;
     using System.Data.Entity;

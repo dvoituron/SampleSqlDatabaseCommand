@@ -33,6 +33,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Apps72.Dev.Data, Version=1.5.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Apps72.Dev.Data.1.5.2\lib\net40-client\Apps72.Dev.Data.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Dapper, Version=1.40.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Dapper.1.42\lib\net45\Dapper.dll</HintPath>
       <Private>True</Private>
@@ -58,41 +62,49 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AdoNet.cs" />
-    <Compile Include="Dapper.cs" />
-    <Compile Include="DEPT.cs">
+    <Compile Include="Ado\AdoNet.cs" />
+    <Compile Include="SqlDbCmd\BestPracticeSample.cs" />
+    <Compile Include="Dapper\Dapper.cs" />
+    <Compile Include="SqlDbCmd\DataService.cs" />
+    <Compile Include="EF\DEPT.cs">
       <DependentUpon>ScottEF.tt</DependentUpon>
     </Compile>
-    <Compile Include="EMP.cs">
+    <Compile Include="EF\EMP.cs">
       <DependentUpon>ScottEF.tt</DependentUpon>
     </Compile>
-    <Compile Include="EntityFramework.cs" />
+    <Compile Include="EF\EntityFramework.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ScottEF.Context.cs">
+    <Compile Include="SqlDbCmd\Scott.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Scott.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\ScottEF.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ScottEF.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="ScottEF.cs">
+    <Compile Include="EF\ScottEF.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ScottEF.tt</DependentUpon>
     </Compile>
-    <Compile Include="ScottEF.Designer.cs">
+    <Compile Include="EF\ScottEF.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ScottEF.edmx</DependentUpon>
     </Compile>
+    <Compile Include="SqlDbCmd\SqlDbCommand.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
-    <EntityDeploy Include="ScottEF.edmx">
+    <EntityDeploy Include="EF\ScottEF.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>ScottEF.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="ScottEF.edmx.diagram">
+    <None Include="EF\ScottEF.edmx.diagram">
       <DependentUpon>ScottEF.edmx</DependentUpon>
     </None>
   </ItemGroup>
@@ -100,12 +112,16 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="ScottEF.Context.tt">
+    <Content Include="SqlDbCmd\Scott.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Scott.cs</LastGenOutput>
+    </Content>
+    <Content Include="EF\ScottEF.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>ScottEF.edmx</DependentUpon>
       <LastGenOutput>ScottEF.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="ScottEF.tt">
+    <Content Include="EF\ScottEF.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>ScottEF.edmx</DependentUpon>
       <LastGenOutput>ScottEF.cs</LastGenOutput>

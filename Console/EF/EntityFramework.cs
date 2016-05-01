@@ -10,9 +10,10 @@ namespace SampleSqlDatabaseCommand.CommandConsole
     {
         public static void DisplaySmith()
         {
+            Console.WriteLine();
             Console.WriteLine("Entity Framework 6.x");
             
-            var db = new ScottEntities();
+            var db = new EF.ScottEntities();
             
             var query = from e in db.EMPs
                         where e.EMPNO == 7369
