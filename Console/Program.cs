@@ -12,11 +12,6 @@ namespace SampleSqlDatabaseCommand.CommandConsole
 
         static void Main(string[] args)
         {
-            AdoNet.DisplaySmith();
-            EntityFramework.DisplaySmith();
-            Dapper.DisplaySmith();
-            SqlDbCommand.DisplaySmith();
-            BestPracticeSample.DisplaySmith();
 
             Console.WriteLine();
             Console.WriteLine("Press any key to continue...");

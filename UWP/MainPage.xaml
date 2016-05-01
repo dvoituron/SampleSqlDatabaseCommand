@@ -6,21 +6,5 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
-
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <ListView x:Name="listView" Margin="10">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel Orientation="Horizontal" Margin="10">
-                        <Image Source="{Binding PICTURE}" Width="60" Height="60" />
-                        <StackPanel Margin="20, 10">
-                            <TextBlock Text="{Binding ENAME}" />
-                            <TextBlock Text="{Binding JOB}" />
-                        </StackPanel>
-                    </StackPanel>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
-    </Grid>
-
+    <Grid />
 </Page>

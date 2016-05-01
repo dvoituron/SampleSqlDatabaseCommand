@@ -25,9 +25,6 @@ namespace SampleSqlDatabaseCommand.Uwp
         public MainPage()
         {
             this.InitializeComponent();
-
-            DataService data = new DataService();
-            listView.ItemsSource = data.GetAllEmployees();
         }
     }
 }

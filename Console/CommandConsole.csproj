@@ -63,69 +63,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Ado\AdoNet.cs" />
-    <Compile Include="SqlDbCmd\BestPracticeSample.cs" />
     <Compile Include="Dapper\Dapper.cs" />
-    <Compile Include="SqlDbCmd\DataService.cs" />
-    <Compile Include="EF\DEPT.cs">
-      <DependentUpon>ScottEF.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EF\EMP.cs">
-      <DependentUpon>ScottEF.tt</DependentUpon>
-    </Compile>
     <Compile Include="EF\EntityFramework.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SqlDbCmd\Scott.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Scott.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EF\ScottEF.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ScottEF.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EF\ScottEF.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ScottEF.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EF\ScottEF.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ScottEF.edmx</DependentUpon>
-    </Compile>
     <Compile Include="SqlDbCmd\SqlDbCommand.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
-    <EntityDeploy Include="EF\ScottEF.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>ScottEF.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <None Include="EF\ScottEF.edmx.diagram">
-      <DependentUpon>ScottEF.edmx</DependentUpon>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="SqlDbCmd\Scott.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Scott.cs</LastGenOutput>
-    </Content>
-    <Content Include="EF\ScottEF.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ScottEF.edmx</DependentUpon>
-      <LastGenOutput>ScottEF.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="EF\ScottEF.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ScottEF.edmx</DependentUpon>
-      <LastGenOutput>ScottEF.cs</LastGenOutput>
-    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

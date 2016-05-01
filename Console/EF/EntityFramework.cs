@@ -13,15 +13,6 @@ namespace SampleSqlDatabaseCommand.CommandConsole
             Console.WriteLine();
             Console.WriteLine("Entity Framework 6.x");
             
-            var db = new EF.ScottEntities();
-            
-            var query = from e in db.EMPs
-                        where e.EMPNO == 7369
-                        select e.ENAME;
-
-            var name = query.First();
-
-            Console.WriteLine(name);
         }
     }
 }
